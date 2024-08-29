@@ -1,4 +1,5 @@
 from typing import Callable, Literal
+from gzip import BadGzipFile
 
 from datatrove.io import DataFileLike, DataFolderLike
 from datatrove.pipeline.readers.base import BaseDiskReader
@@ -82,5 +83,5 @@ class JsonlReader(BaseDiskReader):
                             logger.warning(f"Error when reading `{filepath}`: {e}")
                             continue
                     yield document
-            except UnicodeDecodeError as e:
+            except (UnicodeDecodeError, BadGzipFile) as e:
                 logger.warning(f"File `{filepath}` may be corrupted: raised UnicodeDecodeError ({e})")
