@@ -105,7 +105,7 @@ class URLFilter(BaseFilter):
 
     def filter(self, document: Document) -> bool | tuple[bool, str]:
         self.download_data()
-        url = document.metadata.get("url")
+        url = document.metadata.get("url", document.metadata.get("WARC-Target-URI"))
 
         assert url, "Document does not have url in its metadata"
         url_info = self.tldextractor(url)
