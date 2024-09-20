@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from concurrent.futures import ThreadPoolExecutor
+import traceback
 
 from datatrove.data import DocumentsPipeline
 from datatrove.pipeline.base import PipelineStep
@@ -56,7 +57,7 @@ class BaseExtractor(PipelineStep):
                         logger.warning("⏰ Timeout while cleaning record text. Skipping record.")
                         continue
                     except Exception as e:
-                        logger.warning(f'❌ Error "{e}" while cleaning record text. Skipping record.')
+                        logger.warning(f'❌ Error "{str(e)}" while cleaning record text. Skipping record.\n{traceback.format_exc()}')
                         continue
                 if doc.text:
                     self.stat_update(StatHints.forwarded)
