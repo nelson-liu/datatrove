@@ -3,7 +3,7 @@ from abc import abstractmethod
 from types import MethodType
 from typing import Callable
 
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.data import Document, DocumentsPipeline
 from datatrove.io import DataFileLike, DataFolderLike, get_datafolder, get_shard_from_paths_file

@@ -4,7 +4,7 @@ import struct
 from typing import IO
 
 import numpy as np
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.io import DataFolder, get_datafolder
 from datatrove.utils.tokenization import load_tokenizer

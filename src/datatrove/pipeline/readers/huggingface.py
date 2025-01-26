@@ -2,7 +2,7 @@ import copy
 from typing import Callable
 
 from loguru import logger
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.data import DocumentsPipeline
 from datatrove.pipeline.readers.base import BaseReader

@@ -3,7 +3,7 @@ from typing import BinaryIO, Generator
 
 import numpy as np
 from numpy.random import default_rng
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.data import DocumentsPipeline
 from datatrove.io import DataFolderLike, get_datafolder

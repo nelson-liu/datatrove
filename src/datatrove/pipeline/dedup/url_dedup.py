@@ -13,7 +13,7 @@ from typing import BinaryIO, Callable, Generator
 
 import numpy as np
 from fsspec.spec import AbstractBufferedFile
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.data import Document, DocumentsPipeline
 from datatrove.io import DataFolderLike, get_datafolder

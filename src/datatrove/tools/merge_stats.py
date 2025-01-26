@@ -2,7 +2,7 @@ import argparse
 import json
 import os.path
 
-from tqdm import tqdm
+from tqdm_loggable.auto import tqdm
 
 from datatrove.io import get_datafolder, open_file
 from datatrove.utils.logging import logger
