@@ -511,7 +511,10 @@ class MinhashDedupCluster(PipelineStep):
             logger.info("Loading dup files...")
             for dup_file in tqdm(dup_files, desc="Reading dup files"):
                 with self.input_folder.open(dup_file, "rb") as dupf:
-                    for f1, d1, f2, d2 in read_tuples_from_file(dupf, "4I", lines_to_buffer=self.lines_to_buffer):
+                    for f1, d1, f2, d2 in tqdm(
+                        read_tuples_from_file(dupf, "4I", lines_to_buffer=self.lines_to_buffer),
+                        desc="Reading dup file",
+                    ):
                         a, b = (f1, d1), (f2, d2)
                         if self.ignore_index_matches and a == (SENTINEL, SENTINEL):
                             # if we are skipping matches with the index and "a" is from the index
