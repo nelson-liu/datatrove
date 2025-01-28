@@ -526,7 +526,7 @@ class MinhashDedupCluster(PipelineStep):
             ci = 0
             cluster_ids = {}
             with self.output_folder.get_output_file_manager(mode="wb") as output_mg:
-                logger.info("Sorting union set")
+                logger.info(f"Sorting union set, {len(union_set)} items")
                 for node in tqdm(sorted(union_set), desc="Writing output"):
                     self.stat_update("duplicates")
                     file, doc = node
