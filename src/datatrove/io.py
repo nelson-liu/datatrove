@@ -25,11 +25,14 @@ class OutputFileManager:
         compression: the compression to use
     """
 
-    def __init__(self, fs, mode: str = "wt", compression: str | None = "infer"):
+    def __init__(
+        self, fs, mode: str = "wt", compression: str | None = "infer", block_size: int = 1 * 1024 * 1024 * 1024
+    ):
         self.fs = fs
         self.mode = mode
         self.compression = compression
         self._output_files = {}
+        self.block_size = block_size
 
     def get_file(self, filename):
         """
@@ -41,7 +44,9 @@ class OutputFileManager:
 
         """
         if filename not in self._output_files:
-            self._output_files[filename] = self.fs.open(filename, mode=self.mode, compression=self.compression)
+            self._output_files[filename] = self.fs.open(
+                filename, mode=self.mode, compression=self.compression, block_size=self.block_size
+            )
         return self._output_files[filename]
 
     def get_open_files(self):

@@ -49,6 +49,7 @@ class ParquetReader(BaseDiskReader):
         recursive: bool = True,
         glob_pattern: str | None = None,
         shuffle_files: bool = False,
+        block_size: int = 1 * 1024 * 1024 * 1024,
     ):
         super().__init__(
             data_folder,
@@ -67,11 +68,12 @@ class ParquetReader(BaseDiskReader):
         )
         self.batch_size = batch_size
         self.read_metadata = read_metadata
+        self.block_size = block_size
 
     def read_file(self, filepath: str):
         import pyarrow.parquet as pq
 
-        with self.data_folder.open(filepath, "rb") as f:
+        with self.data_folder.open(filepath, "rb", block_size=self.block_size) as f:
             with pq.ParquetFile(f) as pqf:
                 li = 0
                 columns = [self.text_key, self.id_key] if not self.read_metadata else None
